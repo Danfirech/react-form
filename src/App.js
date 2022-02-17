@@ -2,34 +2,28 @@ import React, { useState } from "react";
 import "./index.css";
 
 export default function App() {
-  const [values, setvalues] = useState({
+  const [values, setValues] = useState({
     firstName: "",
     lastName: "",
     email: "",
   });
 
-  const [submitted, setsubmitted] = useState(false);
-
   const handleFirstNameInputChange = (event) => {
-    setvalues({ ...values, firstName: event.target.value });
+    setValues({ ...values, firstName: event.target.value });
   };
 
   const handleLastNameInputChange = (event) => {
-    setvalues({ ...values, lastName: event.target.value });
+    setValues({ ...values, lastName: event.target.value });
   };
 
-  const handleEmailChange = (event) => {
-    setvalues({ ...values, email: event.target.value });
+  const handleEmailInputChange = (event) => {
+    setValues({ ...values, email: event.target.value });
   };
-
   return (
     <div class="form-container">
       <form class="register-form">
-        {submitted ? (
-          <div class="success-message">Success! Thank you for registering</div>
-        ) : null}
+        <div className="success-message"></div>
         {/* Uncomment the next line to show the success message */}
-
         <input
           onChange={handleFirstNameInputChange}
           value={values.firstName}
@@ -53,7 +47,7 @@ export default function App() {
         {/* Uncomment the next line to show the error message */}
         {/* <span id="last-name-error">Please enter a last name</span> */}
         <input
-          onChange={handleEmailChange}
+          onChange={handleEmailInputChange}
           value={values.email}
           id="email"
           class="form-field"
