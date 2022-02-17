@@ -8,6 +8,8 @@ export default function App() {
     email: "",
   });
 
+  const [submitted, setSubmitted] = useState();
+
   const handleFirstNameInputChange = (event) => {
     setValues({ ...values, firstName: event.target.value });
   };
@@ -19,10 +21,20 @@ export default function App() {
   const handleEmailInputChange = (event) => {
     setValues({ ...values, email: event.target.value });
   };
+
+  const handleSubmit = (event) => {
+    event.preventdefault();
+    setSubmitted(true);
+  };
+
   return (
     <div class="form-container">
-      <form class="register-form">
-        <div className="success-message"></div>
+      <form class="register-form" onSubmit={handleSubmit}>
+        {submitted ? (
+          <div className="success-message">
+            Success! Thank you for registering!
+          </div>
+        ) : null}
         {/* Uncomment the next line to show the success message */}
         <input
           onChange={handleFirstNameInputChange}
@@ -33,8 +45,7 @@ export default function App() {
           placeholder="First Name"
           name="firstName"
         />
-        {/* Uncomment the next line to show the error message */}
-        {/* <span id="first-name-error">Please enter a first name</span> */}
+        {submitted && !values.firstName ? <span>Enter first name </span> : null}
         <input
           onChange={handleLastNameInputChange}
           value={values.lastName}
@@ -44,8 +55,9 @@ export default function App() {
           placeholder="Last Name"
           name="lastName"
         />
+
         {/* Uncomment the next line to show the error message */}
-        {/* <span id="last-name-error">Please enter a last name</span> */}
+        <span id="last-name-error">Please enter a last name</span>
         <input
           onChange={handleEmailInputChange}
           value={values.email}
@@ -56,7 +68,7 @@ export default function App() {
           name="email"
         />
         {/* Uncomment the next line to show the error message */}
-        {/* <span id="email-error">Please enter an email address</span> */}
+        <span id="email-error">Please enter an email address</span>
         <button class="form-field" type="submit">
           Register
         </button>
